@@ -1,3 +1,4 @@
+import styles from "./Post.module.css";
 import React, { useState, useEffect } from "react";
 
 export const Post = ({ data }) => {
@@ -12,8 +13,9 @@ export const Post = ({ data }) => {
     <>
       {postEl.map((el) => {
         return (
-          <div key={el.id}>
-            <img alt={el.title} src={el.image}></img>
+          <div className={styles.article} key={el.id}>
+            <img alt={el.title} src={el.image}></img>{" "}
+            {/* Rajouter une classe pour l'image */}
             <h1>{el.title}</h1>
             <p>{el.text}</p>
           </div>
