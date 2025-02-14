@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
 
   return (
     <BrowserRouter>
@@ -13,7 +14,15 @@ function App() {
         {/*On mettra des routes vers les composants*/}
         <Route
           path="/"
-          element={<Home search={search} setSearch={setSearch} data={data} />}
+          element={
+            <Home
+              search={search}
+              setSearch={setSearch}
+              data={data}
+              category={category}
+              setCategory={setCategory}
+            />
+          }
         ></Route>
       </Routes>
     </BrowserRouter>

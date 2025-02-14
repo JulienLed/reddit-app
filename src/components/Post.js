@@ -10,17 +10,20 @@ export const Post = ({ data }) => {
   }, [data]);
 
   return (
-    <>
+    <div className={styles.posts}>
       {postEl.map((el) => {
         return (
-          <div className={styles.article} key={el.id}>
-            <img alt={el.title} src={el.image}></img>{" "}
-            {/* Rajouter une classe pour l'image */}
+          <div className={styles.post} key={el.id}>
             <h1>{el.title}</h1>
+            <img
+              className={styles.postImg}
+              alt={el.title}
+              src={el.image}
+            ></img>{" "}
             <p>{el.text}</p>
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
