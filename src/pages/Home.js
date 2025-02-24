@@ -1,14 +1,15 @@
 import React from "react";
+import styles from "./Home.module.css";
 import { Post } from "../components/Post";
 import { SearchBar } from "../components/SearchBar";
-import { Category } from "../components/Category";
 
-export const Home = ({ search, setSearch, data, setCategory }) => {
+export const Home = ({ search, setSearch, data }) => {
   return (
-    <>
-      <SearchBar search={search} setSearch={setSearch} />
-      <Category setCategory={setCategory} />
-      <Post data={data} />
-    </>
+    <div>
+      <SearchBar />
+      <div className={styles.home_main}>
+        <Post data={data} search={search} />
+      </div>
+    </div>
   );
 };
