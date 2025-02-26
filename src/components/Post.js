@@ -1,15 +1,20 @@
 import styles from "./Post.module.css";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { fetchData } from "../app/Data";
 
-export const Post = ({ data }) => {
+export const Post = () => {
   const [postEl, setPostEl] = useState([]);
   const search = useSelector((state) => state.search);
 
   useEffect(() => {
-    const postsArr = Object.values(data);
-    setPostEl(postsArr);
-  }, [data]);
+    const getData = async () => {
+      const data = await fetchData();
+      const postsArr = Object.values(data);
+      setPostEl(postsArr);
+    };
+    getData();
+  }, []);
 
   let filteredPosts = postEl.filter((el) => {
     const matchSearch = search
@@ -32,7 +37,7 @@ export const Post = ({ data }) => {
                 alt={el.title}
                 src={el.image}
               ></img>{" "}
-              <p>{el.text}</p>
+              <p>By {el.author}</p>
             </div>
           );
         })
