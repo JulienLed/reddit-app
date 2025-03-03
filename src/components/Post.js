@@ -39,6 +39,7 @@ export const Post = () => {
                   className={styles.postImg}
                   alt={el.title}
                   src={el.image}
+                  loading="lazy"
                 ></img>{" "}
                 <p>By {el.author}</p>
               </div>
