@@ -4,8 +4,7 @@ export const fetchData = () => {
     .then((resjson) => {
       const newData = {};
       const subRedditArr = [];
-      //Ajouter les subreddit dans le tableau, puis les mapper dans SubReddit.js
-      console.log(resjson);
+      const nextData = resjson.after;
       for (let el of resjson.data.children) {
         newData[el.data.id] = {
           id: el.data.id,
@@ -16,10 +15,15 @@ export const fetchData = () => {
           })(),
           url: el.data.url,
           author: el.data.author,
-          subReddit: el.data.subreddit,
+          subReddit: (() => {
+            if (!subRedditArr.includes(el.data.subreddit)) {
+              subRedditArr.push(el.data.subreddit);
+            }
+            return el.data.subreddit;
+          })(),
         };
       }
-      return newData;
+      return { newData, subRedditArr, nextData };
     })
     .catch((err) => {
       console.log(`Error: ${err}`);

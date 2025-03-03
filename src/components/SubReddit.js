@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { fetchData } from "../app/Data";
-import { setSubReddit } from "../features/SubReddit";
+import styles from "./SubReddit.module.css";
+import { useDispatch } from "react-redux";
+import { setSubReddit } from "../features/SubRedditSlice";
 
 export const SubReddit = () => {
   const dispatch = useDispatch();
-
-  const [data, setData] = useState();
+  const [subReddits, setSubReddits] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       let data = await fetchData();
-      setData(data);
+      setSubReddits([...data.subRedditArr].sort());
     };
     getData();
   }, []);
 
   return (
     <div>
-      {/*remplacer data;map() par le tableau des subreddit depuis fetchData*/}
-      {data.map((el) => {
+      {subReddits.map((el) => {
         return (
-          <ul>
-            <li onClick={dispatch(setSubReddit(el.target.value))}>
+          <ul key={el}>
+            <li
+              className={styles.subReddit}
+              onClick={() => {
+                dispatch(setSubReddit(el));
+              }}
+            >
               <span>{el}</span>
             </li>
           </ul>
